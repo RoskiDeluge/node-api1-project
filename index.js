@@ -5,9 +5,8 @@ const server = express();
 
 let users = [
   {
-    id: "a_unique_id", // hint: use the shortid npm package to generate it
-    name: "Jane Doe", // String, required
-    bio: "Not Tarzan's Wife, another Jane",  // String, required
+    name: "Jane Doe", 
+    bio: "Not Tarzan's Wife, another Jane"
   }
 ];
 
@@ -22,11 +21,11 @@ server.get("/", (req, res) => {
 })
 
 server.get("/api/users", (req, res) => {
-  res.send(200).json(users);
+  res.status(200).json(users);
 })
 
 server.get("/api/users", (req, res) => {
-  res.send(500).json({ errorMessage: "The users info could not be retrieved" });
+  res.status(500).json({ errorMessage: "The users info could not be retrieved" });
 })
 
 server.post("/api/users", (req, res) => {
@@ -35,15 +34,15 @@ server.post("/api/users", (req, res) => {
   userInfo.id = shortid.generate();
 
   if (userInfo.name === undefined || userInfo.bio === undefined) {
-    res.sendStatus(400).json({ errorMessage: "Please provide name and bio for the user." })
+    res.status(400).json({ errorMessage: "Please provide name and bio for the user." })
   } else {
     users.push(userInfo)
-    res.sendStatus(201).json(userInfo)
+    res.status(201).json(userInfo)
   }
 })
 
 server.post("/api/users", (req, res) => {
-  res.sendStatus(500).json({errorMessage: "There was an error while saving the user to the database"})
+  res.status(500).json({errorMessage: "There was an error while saving the user to the database"})
 })
 
 
